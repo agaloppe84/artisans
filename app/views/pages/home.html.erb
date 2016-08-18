@@ -1,2 +1,83 @@
 <h1>Pages#home</h1>
 <p>Find me in app/views/pages/home.html.erb</p>
+
+
+<div class="text-center">
+  <% @blinds.each do |blind| %>
+  <div class="card">
+    <h2 class="bigtitle"><%= blind.title %></h2>
+    <h3 class="bigtitle"><%= blind.subtitle %></h3>
+  </div>
+    <h4><%= blind.description %></h4>
+    <h4><%= blind.popularity %></h4>
+    <h4><%= blind.type.title %></h4>
+    <p><%= image_tag blind.photo, width: "450x450" %></p>
+    <hr>
+  <% end %>
+</div>
+
+
+<%= link_to admin_root_path, class: "navbar-wagon-brand" do %>
+    <%= image_tag "http://payload4.cargocollective.com/1/2/91154/2381182/market_st.jpg" %>
+  <% end %>
+
+
+
+
+
+<% moustiquaires = @blinds.joins(:type).where( "types.title = 'moustiquaire'" ).references(:type) %>
+
+<h4>Moustiquaires</h4>
+
+<% blind_count = moustiquaires.count %>
+<%= blind_count %>
+
+<% moustiquaires.each do |moustiquaire| %>
+   <%= moustiquaire.type.title %>
+<% end %>
+
+<hr>
+<hr>
+<hr>
+
+
+<% se = @blinds.joins(:type).where( "types.title = 'store extérieur'" ).references(:type) %>
+
+<h4>stores extérieurs</h4>
+
+<% blind_count = se.count %>
+<%= blind_count %>
+
+<% se.each do |s| %>
+   <%= s.type.title %>
+   <h4><%= s.description %></h4>
+    <h4><%= s.popularity %></h4>
+<% end %>
+
+
+<hr>
+<hr>
+<hr>
+
+
+
+<% menuiseries = @blinds.joins(:type).where( "types.title = 'menuiserie'" ).references(:type) %>
+
+<h4>Menuiseries</h4>
+
+<% blind_count = menuiseries.count %>
+<%= blind_count %>
+
+<% menuiseries.each do |menuserie| %>
+   <%= menuserie.type.title %>
+   <h4><%= menuserie.description %></h4>
+    <h4><%= menuserie.popularity %></h4>
+<% end %>
+
+<hr>
+<hr>
+<hr>
+
+
+
+
